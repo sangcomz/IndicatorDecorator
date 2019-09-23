@@ -2,10 +2,11 @@ package xyz.sangcomz.indicatordecoratorsample
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.PagerSnapHelper
 import kotlinx.android.synthetic.main.activity_main.*
 import xyz.sangcomz.indicatordecorator.IndicatorItemDecoration
-import xyz.sangcomz.indicatordecorator.LinePagerIndicatorDecoration
+import xyz.sangcomz.indicatordecorator.shape.DrawableIndicator
 
 class MainActivity : AppCompatActivity() {
 
@@ -27,12 +28,22 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         viewPager.adapter = adapter
-        viewPager.addItemDecoration(IndicatorItemDecoration())
+        viewPager.addItemDecoration(IndicatorItemDecoration().apply {
+        })
 //        viewPager.addItemDecoration(LinePagerIndicatorDecoration())
 
         recyclerView.adapter = adapter
         PagerSnapHelper().attachToRecyclerView(recyclerView)
-//        recyclerView.addItemDecoration(IndicatorItemDecoration())
-        recyclerView.addItemDecoration(LinePagerIndicatorDecoration())
+        recyclerView.addItemDecoration(IndicatorItemDecoration().apply {
+            indicatorShape = DrawableIndicator(
+                ContextCompat.getDrawable(
+                    this@MainActivity,
+                    R.drawable.ic_grade_red_24dp
+                )!!,
+                ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_grade_black_24dp)!!
+            )
+        })
+
+
     }
 }
