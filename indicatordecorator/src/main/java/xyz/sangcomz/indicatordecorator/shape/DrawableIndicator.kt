@@ -8,7 +8,7 @@ class DrawableIndicator(
     drawableActive: Drawable,
     drawableInActive: Drawable
 ) : IndicatorShape {
-    override var scaleFactor: Float = 1f
+    override var scaleFactor: Float = 1.2f
     var width: Float = drawableActive.intrinsicWidth.toFloat()
     var drawableActive = drawableActive
     var drawableInActive = drawableInActive
@@ -27,9 +27,9 @@ class DrawableIndicator(
         val scale = ((width * scaleFactor) - width) / 2
         drawableActive.setBounds(
             (x - scale).toInt(),
-            (y - width / 2).toInt(),
+            (y - width / 2 - scale).toInt(),
             (x + width + scale).toInt(),
-            (y + width / 2).toInt()
+            (y + width / 2 + scale).toInt()
         )
         drawableActive.draw(c)
     }

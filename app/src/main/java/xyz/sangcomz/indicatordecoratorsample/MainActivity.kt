@@ -6,7 +6,9 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.PagerSnapHelper
 import kotlinx.android.synthetic.main.activity_main.*
 import xyz.sangcomz.indicatordecorator.IndicatorItemDecoration
+import xyz.sangcomz.indicatordecorator.shape.CircleIndicator
 import xyz.sangcomz.indicatordecorator.shape.DrawableIndicator
+import xyz.sangcomz.indicatordecorator.shape.SquareIndicator
 
 class MainActivity : AppCompatActivity() {
 
@@ -27,10 +29,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        viewPager.adapter = adapter
-        viewPager.addItemDecoration(IndicatorItemDecoration().apply {
+        viewPager1.adapter = adapter
+        viewPager1.addItemDecoration(IndicatorItemDecoration().apply {
+            indicatorShape = CircleIndicator()
         })
-//        viewPager.addItemDecoration(LinePagerIndicatorDecoration())
+
+        viewPager2.adapter = adapter
+        viewPager2.addItemDecoration(IndicatorItemDecoration().apply {
+            indicatorShape = SquareIndicator()
+        })
 
         recyclerView.adapter = adapter
         PagerSnapHelper().attachToRecyclerView(recyclerView)

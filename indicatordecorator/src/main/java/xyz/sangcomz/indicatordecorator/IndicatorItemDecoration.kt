@@ -1,25 +1,37 @@
 package xyz.sangcomz.indicatordecorator
 
-import android.content.res.Resources
 import android.graphics.Canvas
 import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import xyz.sangcomz.indicatordecorator.ext.toDP
 import xyz.sangcomz.indicatordecorator.shape.CircleIndicator
 import xyz.sangcomz.indicatordecorator.shape.IndicatorShape
 import kotlin.math.max
 
+/**
+ * inspired by https://github.com/bleeding182/recyclerviewItemDecorations
+ */
 class IndicatorItemDecoration : RecyclerView.ItemDecoration() {
-
-    var topOffset = (DP * 4).toInt()
-    var bottomOffset = (DP * 4).toInt()
+    /**
+     * Top Offset with Page Item
+     */
+    var topOffset = 4.toDP().toInt()
+    /**
+     * Bottom Offset in View
+     */
+    var bottomOffset = 4.toDP().toInt()
     /**
      * Padding between indicators.
      */
-    var indicatorItemPadding = DP * 8
+    var indicatorItemPadding = 8.toDP()
 
-    var indicatorShape: IndicatorShape = CircleIndicator().apply { radius = DP * 4 }
+    /**
+     * Indicator shape
+     * By default it has a circle of radius 4.
+     */
+    var indicatorShape: IndicatorShape = CircleIndicator().apply { radius = 4.toDP() }
 
     override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         super.onDrawOver(c, parent, state)
@@ -39,7 +51,6 @@ class IndicatorItemDecoration : RecyclerView.ItemDecoration() {
         val indicatorPosY = parent.height - (indicatorShape.getIndicatorWidth() / 2) - bottomOffset
 
         drawInactiveIndicators(c, indicatorStartX, indicatorPosY, itemCount)
-
 
         val activePosition = layoutManager.findFirstVisibleItemPosition()
         if (activePosition == RecyclerView.NO_POSITION) {
@@ -98,9 +109,5 @@ class IndicatorItemDecoration : RecyclerView.ItemDecoration() {
     ) {
         super.getItemOffsets(outRect, view, parent, state)
         outRect.bottom = (topOffset + bottomOffset + indicatorShape.getIndicatorWidth()).toInt()
-    }
-
-    companion object {
-        private val DP = Resources.getSystem().displayMetrics.density
     }
 }
