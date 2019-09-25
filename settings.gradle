@@ -1,2 +1,9 @@
 include ':app', ':indicatordecorator'
 rootProject.name='IndicatorDecorator'
+
+gradle.ext.versionCode = 1
+gradle.ext.versionName = '0.0.1'
+
+gradle.ext.set('minSdk', 21)
+gradle.ext.set('targetSdk', 29)
+gradle.ext.set('compileSdk', 29)
