@@ -1,3 +1,4 @@
+![Image](/pic/banner.png)
 # IndicatorDecorator
 Indicator decorator is an indicator that can be used in ViewPager2 and RecyclerView.
 
