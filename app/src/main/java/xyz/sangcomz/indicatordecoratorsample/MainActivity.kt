@@ -55,13 +55,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        viewPager1.adapter = adapter1
-        viewPager1.addItemDecoration(IndicatorItemDecoration().apply {
-            indicatorShape = CircleIndicator().apply {
-                isOverlap = true
-                colorActive = ContextCompat.getColor(this@MainActivity, R.color.colorPrimaryDark)
-                isShowBackground = true
-            }
+        recyclerView.adapter = adapter1
+        PagerSnapHelper().attachToRecyclerView(recyclerView)
+        recyclerView.addItemDecoration(IndicatorItemDecoration().apply {
+            indicatorShape = DrawableIndicator(
+                ContextCompat.getDrawable(
+                    this@MainActivity,
+                    R.drawable.ic_grade_red_24dp
+                )!!,
+                ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_grade_gray_24dp)!!
+            )
         })
 
         viewPager2.adapter = adapter2
@@ -71,17 +74,12 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        recyclerView.adapter = adapter3
-        PagerSnapHelper().attachToRecyclerView(recyclerView)
-        recyclerView.addItemDecoration(IndicatorItemDecoration().apply {
-            indicatorShape = DrawableIndicator(
-                ContextCompat.getDrawable(
-                    this@MainActivity,
-                    R.drawable.ic_grade_red_24dp
-                )!!,
-                ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_grade_gray_24dp)!!
-            ).apply {
-                width = 64f
+        viewPager1.adapter = adapter3
+        viewPager1.addItemDecoration(IndicatorItemDecoration().apply {
+            indicatorShape = CircleIndicator().apply {
+                isOverlap = true
+                colorActive = ContextCompat.getColor(this@MainActivity, R.color.colorPrimaryDark)
+                isShowBackground = true
             }
         })
 

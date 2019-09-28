@@ -98,7 +98,8 @@ if (project.rootProject.file('local.properties').isFile()) {
         tagName = version
         targetCommitish = 'master'
         body = """## Release Note
-* Release!
+* [Feature] Indicators to overlap. Use`isOverlap` (#2)
+8 [Feature] Indicator background setting method added (#4)
 """
         name = version
     }
