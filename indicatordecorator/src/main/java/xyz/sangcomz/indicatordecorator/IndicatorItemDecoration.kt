@@ -1,7 +1,6 @@
 package xyz.sangcomz.indicatordecorator
 
-import android.graphics.Canvas
-import android.graphics.Rect
+import android.graphics.*
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -30,6 +29,29 @@ class IndicatorItemDecoration : RecyclerView.ItemDecoration() {
      * Indicator shape
      */
     var isOverlap: Boolean = false
+
+    private val backgroundPaint = Paint()
+    /**
+     * Background visibility
+     */
+    var isShowBackground = false
+    /**
+     * Background Color
+     */
+    var backgroundColor = Color.WHITE
+    /**
+     * Background Corner Radius
+     */
+    var backgroundCornerRadius = 8.toDP()
+    /**
+     * Background side offset
+     */
+    var backgroundSideOffset = 16.toDP().toInt()
+    /**
+     * Background top And bottom offset
+     */
+    var backgroundTopAndBottomOffset = 4.toDP().toInt()
+
     /**
      * Indicator shape
      * By default it has a circle of radius 4.
@@ -55,6 +77,13 @@ class IndicatorItemDecoration : RecyclerView.ItemDecoration() {
             if (isOverlap) parent.height - indicatorShape.getIndicatorHeight() - bottomOffset
             else parent.height - (indicatorShape.getIndicatorHeight() / 2) - bottomOffset
 
+        if (isShowBackground)
+            drawBackground(
+                c,
+                indicatorTotalWidth,
+                indicatorStartX,
+                parent.height.toFloat() - bottomOffset
+            )
 
         drawInactiveIndicators(c, indicatorStartX, indicatorPosY, itemCount)
 
@@ -68,8 +97,24 @@ class IndicatorItemDecoration : RecyclerView.ItemDecoration() {
                 indicatorPosY
             )
         }
+    }
 
+    private fun drawBackground(
+        c: Canvas,
+        totalWidth: Float,
+        startX: Float,
+        bottomY: Float
+    ) {
+        val rectF = RectF()
 
+        backgroundPaint.color = backgroundColor
+        rectF.set(
+            startX + indicatorShape.getIndicatorWidth() / 2 - indicatorShape.drawStartPosition - backgroundSideOffset,
+            bottomY - indicatorShape.getIndicatorHeight() - indicatorShape.drawStartPosition - backgroundTopAndBottomOffset,
+            startX + totalWidth + indicatorShape.getIndicatorWidth() / 2 - indicatorShape.drawStartPosition + backgroundSideOffset,
+            bottomY - indicatorShape.drawStartPosition + backgroundTopAndBottomOffset
+        )
+        c.drawRoundRect(rectF, backgroundCornerRadius, backgroundCornerRadius, backgroundPaint)
     }
 
     private fun drawInactiveIndicators(
@@ -106,6 +151,7 @@ class IndicatorItemDecoration : RecyclerView.ItemDecoration() {
         )
     }
 
+
     override fun getItemOffsets(
         outRect: Rect,
         view: View,
@@ -114,6 +160,9 @@ class IndicatorItemDecoration : RecyclerView.ItemDecoration() {
     ) {
         super.getItemOffsets(outRect, view, parent, state)
         if (!isOverlap)
-            outRect.bottom = (topOffset + bottomOffset + indicatorShape.getIndicatorHeight()).toInt()
+            outRect.bottom = getTotalHeight().toInt()
     }
+
+    private fun getTotalHeight() = topOffset + bottomOffset + indicatorShape.getIndicatorHeight()
+
 }

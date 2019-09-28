@@ -6,10 +6,15 @@ import android.graphics.Paint
 import xyz.sangcomz.indicatordecorator.ext.toDP
 
 class SquareIndicator : IndicatorShape {
+    override val drawStartPosition = 0f
+
     private val paint = Paint().apply { isAntiAlias = true }
+
     var colorActive: Int = Color.BLACK
     var colorInactive: Int = Color.GRAY
     var width = 8.toDP()
+
+
     override var scaleFactor = 1.2f
     override fun inactiveIndicatorDraw(c: Canvas, x: Float, y: Float) {
         paint.color = colorInactive

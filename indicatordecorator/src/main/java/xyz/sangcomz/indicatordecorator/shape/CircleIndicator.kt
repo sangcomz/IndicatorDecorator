@@ -7,6 +7,8 @@ import xyz.sangcomz.indicatordecorator.ext.toDP
 
 class CircleIndicator : IndicatorShape {
     private val paint = Paint().apply { isAntiAlias = true }
+    override val drawStartPosition: Float
+        get() = radius
     var colorActive: Int = Color.CYAN
     var colorInactive: Int = Color.GRAY
     var radius: Float = 4.toDP()
