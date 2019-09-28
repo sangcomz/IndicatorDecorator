@@ -1,6 +1,5 @@
 package xyz.sangcomz.indicatordecoratorsample
 
-import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -59,6 +58,7 @@ class MainActivity : AppCompatActivity() {
         viewPager1.adapter = adapter1
         viewPager1.addItemDecoration(IndicatorItemDecoration().apply {
             indicatorShape = CircleIndicator().apply {
+                isOverlap = true
                 colorActive = ContextCompat.getColor(this@MainActivity, R.color.colorPrimaryDark)
             }
         })

@@ -14,7 +14,7 @@ class CircleIndicator : IndicatorShape {
     override var scaleFactor: Float = 1.2f
 
     override fun getIndicatorWidth() = radius * 2
-
+    override fun getIndicatorHeight() = radius * 2
     override fun inactiveIndicatorDraw(c: Canvas, x: Float, y: Float) {
         paint.color = colorInactive
         c.drawCircle(x, y, radius, paint)

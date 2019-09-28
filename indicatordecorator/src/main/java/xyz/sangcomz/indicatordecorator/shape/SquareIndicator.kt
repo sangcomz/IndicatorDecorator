@@ -29,4 +29,5 @@ class SquareIndicator : IndicatorShape {
     }
 
     override fun getIndicatorWidth() = width
+    override fun getIndicatorHeight() = width
 }

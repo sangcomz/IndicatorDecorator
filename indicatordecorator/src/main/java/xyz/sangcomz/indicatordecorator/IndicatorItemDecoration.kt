@@ -26,7 +26,10 @@ class IndicatorItemDecoration : RecyclerView.ItemDecoration() {
      * Padding between indicators.
      */
     var indicatorItemPadding = 8.toDP()
-
+    /**
+     * Indicator shape
+     */
+    var isOverlap: Boolean = false
     /**
      * Indicator shape
      * By default it has a circle of radius 4.
@@ -48,23 +51,25 @@ class IndicatorItemDecoration : RecyclerView.ItemDecoration() {
         val indicatorTotalWidth = totalLength + paddingBetweenItems
         val indicatorStartX = (parent.width - indicatorTotalWidth) / 2f
 
-        val indicatorPosY = parent.height - (indicatorShape.getIndicatorWidth() / 2) - bottomOffset
+        val indicatorPosY =
+            if (isOverlap) parent.height - indicatorShape.getIndicatorHeight() - bottomOffset
+            else parent.height - (indicatorShape.getIndicatorHeight() / 2) - bottomOffset
+
 
         drawInactiveIndicators(c, indicatorStartX, indicatorPosY, itemCount)
 
         val activePosition = layoutManager.findFirstVisibleItemPosition()
-        if (activePosition == RecyclerView.NO_POSITION) {
-            return
+        if (activePosition == RecyclerView.NO_POSITION) return
+        layoutManager.findViewByPosition(activePosition)?.run {
+            drawSelectedIndicators(
+                c,
+                activePosition + if (width / 2f > width + left) 1 else 0,
+                indicatorStartX,
+                indicatorPosY
+            )
         }
 
-        val view = layoutManager.findViewByPosition(activePosition)!!
 
-        drawSelectedIndicators(
-            c,
-            activePosition + if (view.width / 2f > view.width + view.left) 1 else 0,
-            indicatorStartX,
-            indicatorPosY
-        )
     }
 
     private fun drawInactiveIndicators(
@@ -108,6 +113,7 @@ class IndicatorItemDecoration : RecyclerView.ItemDecoration() {
         state: RecyclerView.State
     ) {
         super.getItemOffsets(outRect, view, parent, state)
-        outRect.bottom = (topOffset + bottomOffset + indicatorShape.getIndicatorWidth()).toInt()
+        if (!isOverlap)
+            outRect.bottom = (topOffset + bottomOffset + indicatorShape.getIndicatorHeight()).toInt()
     }
 }
