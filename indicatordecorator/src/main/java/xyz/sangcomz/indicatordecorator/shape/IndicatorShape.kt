@@ -9,6 +9,11 @@ interface IndicatorShape {
     var scaleFactor: Float
 
     /**
+     * The starting coordinate that is actually drawn
+     * For example, when drawing a square, draw a circle from the x coordinate to the width and a circle the radius of both sides of the x coordinate.
+     */
+    val drawStartPosition: Float
+    /**
      * To draw inactive indicator
      */
     fun inactiveIndicatorDraw(c: Canvas, x: Float, y: Float)

@@ -60,6 +60,7 @@ class MainActivity : AppCompatActivity() {
             indicatorShape = CircleIndicator().apply {
                 isOverlap = true
                 colorActive = ContextCompat.getColor(this@MainActivity, R.color.colorPrimaryDark)
+                isShowBackground = true
             }
         })
 
