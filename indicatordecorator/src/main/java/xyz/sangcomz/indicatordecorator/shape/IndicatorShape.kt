@@ -12,12 +12,19 @@ interface IndicatorShape {
      * To draw inactive indicator
      */
     fun inactiveIndicatorDraw(c: Canvas, x: Float, y: Float)
+
     /**
      * To draw active indicator
      */
     fun activeIndicatorDraw(c: Canvas, x: Float, y: Float)
+
     /**
      * get indicator width
      */
     fun getIndicatorWidth(): Float
+
+    /**
+     * get indicator height
+     */
+    fun getIndicatorHeight(): Float
 }
