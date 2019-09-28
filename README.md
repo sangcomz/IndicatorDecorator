@@ -1,12 +1,15 @@
 # IndicatorDecorator
 Indicator decorator is an indicator that can be used in ViewPager2 and RecyclerView.
 
+## What's New in 0.1.0? :tada:
+- [Feature] Indicators to overlap. Use`isOverlap` (#2)
+
 ## How to Use
 
 ### Gradle
 ```groovy
     dependencies {
-        implementation 'xyz.sangcomz:indicatordecorator:0.0.1'
+        implementation 'xyz.sangcomz:indicatordecorator:0.1.0'
     }
 ```
 ### Usage
@@ -26,6 +29,7 @@ Indicator decorator is an indicator that can be used in ViewPager2 and RecyclerV
 |         bottomOffset       | Bottom Offset in View                     |         4DP         |
 |     indicatorItemPadding   | Padding between indicators                |         8DP         |
 |        indicatorShape      | Indicator shape                           |    CircleIndicator  |
+|          isOverlap         | Can overlap                               |        false        |
 
 #### Support Indicator Shape
 
