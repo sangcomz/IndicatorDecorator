@@ -2,16 +2,15 @@
 # IndicatorDecorator
 Indicator decorator is an indicator that can be used in ViewPager2 and RecyclerView.
 
-## What's New in 0.1.1? :tada:
-- [Feature] Indicators to overlap. Use`isOverlap` (#2)
-- [Feature] Indicator background setting method added (#4)
+## What's New in 0.2.0? :tada:
+- version update
 
 ## How to Use
 
 ### Gradle
 ```groovy
     dependencies {
-        implementation 'xyz.sangcomz:indicatordecorator:0.1.1'
+        implementation 'xyz.sangcomz:indicatordecorator:0.2.0'
     }
 ```
 ### Usage
